@@ -1,7 +1,7 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        // this is  o(n) approach to solve using BS
+        // this is  o(log(n)) approach to solve using BS uses o(1)
         // that uses prop refer to techdose YTch
         int lo=0;
         int hi=nums.size()-1;
