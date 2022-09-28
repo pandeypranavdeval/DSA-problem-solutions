@@ -1,21 +1,31 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        // another o(n) approach
-        int n=nums.size();
-        if(n==1){
+        // this is  o(n) approach to solve using BS
+        // that uses prop refer to techdose YTch
+        int lo=0;
+        int hi=nums.size()-1;
+        if(nums.size()==1){
             return nums[0];
         }
-        for(int i=0;i<n-1;){
-            if(nums[i]==nums[i+1]){
-                i+=2;
+        if(nums[0]!=nums[1]){
+            return nums[0];
+        }
+        if(nums[nums.size()-1]!=nums[nums.size()-2]){
+            return nums[nums.size()-1];
+        }
+        while(lo<=hi){
+            int mid=(hi+lo)>>1;
+            if(nums[mid]!=nums[mid+1]&&nums[mid]!=nums[mid-1]){
+                return nums[mid];
+            }
+            else if(((mid%2==0)&&nums[mid]==nums[mid+1])||((mid%2==1)&&nums[mid]==nums[mid-1])){
+                lo=mid+1;
             }
             else{
-                return nums[i];
+                hi=mid-1;
             }
-        }
-        if(nums[n-1]!=nums[n-2]){
-            return nums[n-1];
+            
         }
         return -1;
     }
