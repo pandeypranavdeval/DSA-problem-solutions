@@ -11,7 +11,7 @@ class Solution{
         if(r==0){
             return 1;
         }
-        long long p1=po(n,r/2)%1000000007;
+        long long p1=po(n,r/2);
         long long p2=(p1*p1)%1000000007;
         if(r&1){
             p2=p2*n;
