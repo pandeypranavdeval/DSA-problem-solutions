@@ -16,25 +16,24 @@ class Solution{
     void rearrange(long long *arr, int n) 
     { 
     	
-        vector<int>v1;
-        vector<int>v2;
-    	for(int i=0;i<n/2;i++){
-    	    v1.push_back(arr[i]);
+    	// efficient code which based upon the storing 2 elements at given position
+    	long long maxind=n-1;
+    	long long minind=0;
+    	long long maxe=arr[n-1]+1;
+    	for(int i=0;i<n;i++){
+    	    if(i%2==0){
+    	        arr[i]=(arr[maxind]%maxe) * maxe + arr[i];
+    	        maxind--;
+    	    } 
+    	    else{
+    	        arr[i]=( arr[minind]%maxe) * maxe +arr[i];
+    	        minind++;
+    	    }
     	}
-    	for(int i=n/2;i<n;i++){
-    	    v2.push_back(arr[i]);
+    	for(int i=0;i<n;i++){
+    	    arr[i]=arr[i]/maxe;
     	}
-    	reverse(v2.begin(),v2.end());
-    	int p=0;
-    	for(int i=0;i<v2.size();i++){
-    	    arr[p]=v2[i];
-    	    p+=2;
-    	}
-    	p=1;
-    	for(int i=0;i<v1.size();i++){
-    	    arr[p]=v1[i];
-    	    p+=2;
-    	}
+    	 
     }
 };
 
