@@ -6,27 +6,26 @@ using namespace std;
 //User function Template for C++
 
 class Queue {
-    stack<int> s1,s2;
+    stack<int> input, output;
 public:
 
-    void enqueue(int x) {
-        s1.push(x);
-        return;
+    void enqueue(int x){
+        input.push(x);
     }
 
-    int dequeue() {
+    int dequeue(){
         int x=-1;
-        while(s1.size()>1){
-            s2.push(s1.top());
-            s1.pop();
+        if(!output.empty()){
+            x=output.top();
+            output.pop();
         }
-        if(!s1.empty()){
-            x=s1.top();
-            s1.pop();
-        }
-        while(!s2.empty()){
-            s1.push(s2.top());
-            s2.pop();
+        else{
+            while(input.empty()==false){
+                output.push(input.top());
+                input.pop();
+            }
+            x=output.top();
+            output.pop();
         }
         return x;
     }
