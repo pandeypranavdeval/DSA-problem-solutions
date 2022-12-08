@@ -9,7 +9,7 @@ using namespace std;
 
 class Solution{
   public:
-  int Mah(vector<int>heights){
+  int Mah(vector<int>&heights){
         stack<int>st;
         int maxA=0;
         int n=heights.size();
