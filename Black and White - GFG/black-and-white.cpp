@@ -24,7 +24,7 @@ int main() {
 long long numOfWays(int n, int m)
 {
     // write code here
-    int mod=1000000007;
+    int mod=1e9+7;
     int ans=0;
     for(int i=1;i<=n;i++){
         for(int j=1;j<=m;j++){
