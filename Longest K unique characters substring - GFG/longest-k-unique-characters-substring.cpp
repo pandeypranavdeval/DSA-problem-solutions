@@ -15,12 +15,8 @@ class Solution{
         map<char,int>m;
         while(j<s.size()){
             m[s[j]]++;
-            if(m.size()<k){
-                j++;
-            }
-            else if(m.size()==k){
+            if(m.size()==k){
                 ans=max(ans,(j-i+1));
-                j++;
             }
             else if(m.size()>k){
                 while(m.size()>k){
@@ -30,8 +26,8 @@ class Solution{
                     }
                     i++;
                 }
-                j++;
             }
+            j++;
         }
         return ans;
     }
