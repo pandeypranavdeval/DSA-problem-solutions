@@ -95,34 +95,38 @@ struct Node {
     Node* right;
 };*/
 class Solution{
-    public:
+    public:// 1 hi me tino traversal ko dekhenge
     vector<int> postOrder(Node* root) {
-        vector<int>ans;
-        Node *curr=root;
-        stack<Node*>st;
-        while(curr!=NULL||!st.empty()){
-            if(curr!=NULL){
-                st.push(curr);
-                curr=curr->left;
+        stack<pair<Node*,int>>st;
+        st.push({root,1});
+        vector<int>preo,ino,poo;
+        // if(!root){
+        //     return poo;
+        // }
+        while(!st.empty()){
+            auto it=st.top();
+            st.pop();
+            if(it.second==1){
+                it.second++;
+                preo.push_back(it.first->data);
+                st.push(it);
+                if((it.first->left)!=NULL){
+                    st.push({it.first->left,1});
+                }
+            }
+            else if(it.second==2){
+                ino.push_back(it.first->data);
+                it.second++;
+                st.push(it);
+                if(it.first->right!=NULL){
+                    st.push({it.first->right,1});
+                }
             }
             else{
-                Node *temp=st.top()->right;
-                if(!temp){
-                    temp=st.top();
-                    st.pop();
-                    ans.push_back(temp->data);
-                    while(!st.empty()&&temp==st.top()->right){
-                        temp=st.top();
-                        st.pop();
-                        ans.push_back(temp->data);
-                    }
-                }
-                else{
-                    curr=temp;
-                }
+                poo.push_back(it.first->data);
             }
         }
-        return ans;
+        return poo;
     }
 };
 
