@@ -124,17 +124,28 @@ struct Node
 }; */
 
 //Function to return a list containing the postorder traversal of the tree.
-void postorder(Node *t,vector<int>&v){
-        if(t!=NULL){
-            postorder(t->left,v);
-            postorder(t->right,v);
-            v.push_back(t->data);
+
+vector <int> postOrder(Node* root){
+    vector<int>ans;
+    if(!root){
+        return ans;
+    }
+    stack<Node*>st1,st2;
+    st1.push(root);
+    while(!st1.empty()){
+        Node *t=st1.top();
+        st1.pop();
+        st2.push(t);
+        if(t->left){
+            st1.push(t->left);
+        }
+        if(t->right){
+            st1.push(t->right);
         }
     }
-vector <int> postOrder(Node* root)
-{
-  // Your code here
-        vector<int>v;
-        postorder(root,v);
-        return v;
+    while(!st2.empty()){
+        ans.push_back(st2.top()->data);
+        st2.pop();
+    }
+    return ans;
 }
