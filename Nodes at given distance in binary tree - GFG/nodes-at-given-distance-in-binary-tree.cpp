@@ -126,11 +126,12 @@ void markparents(Node *node,unordered_map<Node*,Node*>&parent){
         }
         Node *l=preorder(node->left,target);
         
-        Node *r=preorder(node->right,target);
+        
         if(l){
             return  l;
         }
-        else if(r){
+        Node *r=preorder(node->right,target);
+        if(r){
             return r;
             
         }
