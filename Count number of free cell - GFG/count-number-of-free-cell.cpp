@@ -25,16 +25,10 @@ class Solution{
               ctr++;
               t+=n-ctc;
           }
-          else{
-              t+=0;
-          }
           if(c[arr[i][1]]==0){
               c[arr[i][1]]=1;
               ctc++;
               t+=n-ctr;
-          }
-          else{
-              t+=0;
           }
           val-=t;
           ans.push_back(val);
