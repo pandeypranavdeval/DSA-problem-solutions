@@ -32,27 +32,33 @@ struct Node {
 class Solution {
   public:
     // Function to return a list containing the inorder traversal of the tree.
-    
     vector<int> inOrder(Node* root) {
-        vector<int>ans;
-        stack<Node*>st;
-        Node *t=root;
-        while(true){
-            if(t){
-                st.push(t);
-                t=t->left;
-            }
-            else{
-                if(st.empty()){
-                    break;
-                }
-                t=st.top();
-                st.pop();
-                ans.push_back(t->data);
-                t=t->right;
-            }
-        }
-        return ans;
+        // moris trvsal
+        vector<int>in;
+  Node* cur=root;
+  while(cur!=NULL){
+      if(!cur->left){
+          in.push_back(cur->data);
+          cur=cur->right;
+      }
+      else{
+          Node* prev=cur->left;
+          while(prev->right && prev->right!=cur){
+              prev=prev->right;
+          }
+          if(!prev->right){
+              prev->right=cur;
+              cur=cur->left;
+          }
+          else{
+              in.push_back(cur->data);
+              prev->right=NULL;
+              cur=cur->right;
+          }
+      }
+      
+  }
+  return in;
     }
 };
 
