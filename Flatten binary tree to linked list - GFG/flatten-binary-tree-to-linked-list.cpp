@@ -99,20 +99,25 @@ void inorder(struct Node* root)
 class Solution
 {
     public:
-    Node *prev=NULL;
-    void flat(Node* node){
-        if(!node){
-            return;
-        }
-        flat(node->right);
-        flat(node->left);
-        node->right=prev;
-        node->left=NULL;
-        prev=node;
-    }
+    // iterative O[n]time ans o(n) space
     void flatten(Node *root)
     {
-        flat(root);
+        stack<Node*>st;
+        st.push(root);
+        while(!st.empty()){
+            Node* cur=st.top();
+            st.pop();
+            if(cur->right){
+                st.push(cur->right);
+            }
+            if(cur->left){
+                st.push(cur->left);
+            }
+            if(!st.empty()){
+                cur->right=st.top();
+            }
+            cur->left=NULL;
+        }
     }
 };
 
