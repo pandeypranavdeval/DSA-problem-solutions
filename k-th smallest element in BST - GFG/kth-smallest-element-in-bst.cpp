@@ -96,23 +96,21 @@ class Solution {
     void inorder(Node *t,int &ct,int &ans,int &k){
         if(t!=NULL){
             inorder(t->left,ct,ans,k);
-            //v.push_back(t->data);
             ct++;
             if(ct==k){
                 ans=t->data;
+                return;
+            }
+            if(ct==k){
+                return;
             }
             inorder(t->right,ct,ans,k);
         }
     }
     // Return the Kth smallest element in the given BST
     int KthSmallestElement(Node *root, int K) {
-        vector<int>v;
         int ct=0,ans=-1;
         inorder(root,ct,ans,K);
-        // for(int i=0;i<v.size();i++){
-        //     cout<<v[i];
-        // }
-        //cout<<ct<<endl;
         return ans;
     }
 };
