@@ -25,7 +25,7 @@ class Solution {
             for(int j=0;j<V;j++){
                 if(adj[i][j]&&i!=j){
                     adjls[i].push_back(j);
-                    adjls[j].push_back(i);
+                    //adjls[j].push_back(i);
                 }
             }
         }
