@@ -18,10 +18,8 @@ public:
             if(arr[j]=='O'){
                 mp[arr[j]]++;
             }
-            //cout<<mp['O']<<" ";
             if(mp['O']<=m){
                 ans=max(ans,(j-i+1));
-                //cout<<ans<<" ";
             }
             else{
                 while(mp['O']>m&&i<arr.size()){
@@ -33,7 +31,6 @@ public:
             }
             j++;
         }
-        //cout<<"\n";
         return ans;
     }
 };
