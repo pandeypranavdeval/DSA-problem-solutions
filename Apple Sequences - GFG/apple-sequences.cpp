@@ -12,19 +12,19 @@ public:
     int appleSequences(int n, int m, string arr){
         int i=0;
         int j=0;
-        map<char,int>mp;
+        int ct=0;
         int ans=0;
         while(j<arr.size()){
             if(arr[j]=='O'){
-                mp[arr[j]]++;
+                ct++;
             }
-            if(mp['O']<=m){
+            if(ct<=m){
                 ans=max(ans,(j-i+1));
             }
             else{
-                while(mp['O']>m){
+                while(ct>m){
                     if(arr[i]=='O'){
-                        mp[arr[i]]--;
+                        ct--;
                     }
                     i++;
                 }
