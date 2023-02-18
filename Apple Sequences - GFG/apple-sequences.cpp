@@ -22,7 +22,7 @@ public:
                 ans=max(ans,(j-i+1));
             }
             else{
-                while(mp['O']>m&&i<arr.size()){
+                while(mp['O']>m){
                     if(arr[i]=='O'){
                         mp[arr[i]]--;
                     }
