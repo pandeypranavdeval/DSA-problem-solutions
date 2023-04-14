@@ -6,15 +6,25 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int minimumEnergy(vector<int>& height, int n) {
-        vector<int>dp(n);
-        // top down solution
-        dp[0]=0;
-        dp[1]=abs(height[1]-height[0]);
-        for(int i=2;i<n;i++){
-            dp[i]=min(dp[i-2]+abs(height[i]-height[i-2]),dp[i-1]+abs(height[i]-height[i-1]));
+    int fun(int i,vector<int>& height,vector<int>&dp){
+        if(i==0){
+            return 0;
         }
-        return dp[n-1];
+        if(i==1){
+            return abs(height[i]-height[i-1]);
+        }
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        int v1=fun(i-1,height,dp)+abs(height[i]-height[i-1]);
+        int v2=fun(i-2,height,dp)+abs(height[i]-height[i-2]);
+        return dp[i]=min(v1,v2);
+    }
+    int minimumEnergy(vector<int>& height, int n) {
+        vector<int>dp(n+1,-1);
+        int ans=0;
+        ans=fun(n-1,height,dp);
+        return ans;
     }
 };
 
