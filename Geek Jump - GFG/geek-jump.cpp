@@ -8,6 +8,7 @@ class Solution {
   public:
     int minimumEnergy(vector<int>& height, int n) {
         vector<int>dp(n);
+        // top down solution
         dp[0]=0;
         dp[1]=abs(height[1]-height[0]);
         for(int i=2;i<n;i++){
