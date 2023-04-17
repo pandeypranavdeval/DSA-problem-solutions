@@ -8,18 +8,19 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:	
-	 
+	// calculate the maximum sum with out adjacent
 	int findMaxSum(int *arr, int n) {
-	    int a=0;
-      int b=0;
-      for(int i=1; i<=n; i++)
-      {
-          int temp=a;
-          a=max(a,b);
-          b=temp+arr[i-1];
-      }
-      
-      return max(a,b);
+	    vector<int>dp(n,-1);
+	    dp[0]=arr[0];
+	    for(int i=1;i<n;i++){
+	        int pick=arr[i];
+	        if(i>1){
+	            pick+=dp[i-2];
+	        }
+	        int notpick=dp[i-1];
+	        dp[i]=max(pick,notpick);
+	    }
+	    return dp[n-1];
 	}
 };
 
