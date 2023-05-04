@@ -33,11 +33,11 @@ class Solution
         sort(ratio.rbegin(),ratio.rend());
         for(int i=0;i<n;i++){
             if(arr[ratio[i].second].weight<=w){
-                ans+=(double)arr[ratio[i].second].value;
+                ans+=arr[ratio[i].second].value;
                 w-=arr[ratio[i].second].weight;
             }
             else{
-                ans+=(double)ratio[i].first*w;
+                ans+=ratio[i].first*w;
                 w=0;
                 break;
             }
