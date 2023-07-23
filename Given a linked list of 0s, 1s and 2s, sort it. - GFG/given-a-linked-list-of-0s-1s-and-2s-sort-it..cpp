@@ -34,72 +34,39 @@ class Solution
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) {
+        int ct0=0;
+        int ct1=0;
+        int ct2=0;
         Node *t=head;
-        Node *one=NULL,*onet=NULL;
-        Node *zero=NULL,*zerot=NULL;
-        Node *two=NULL,*twot=NULL;
-        while(t!=NULL){
+        while(t){
             if(t->data==0){
-                if(zero==NULL){
-                    zero=t;
-                    zerot=t;
-                }
-                else{
-                    zerot->next=t;
-                    zerot=zerot->next;
-                }
+                ct0++;
             }
-            else if(t->data==1){
-                if(one==NULL){
-                    one=t;
-                    onet=t;
-                }
-                else{
-                    onet->next=t;
-                    onet=onet->next;
-                }
+            if(t->data==1){
+                ct1++;
             }
-            else if(t->data==2){
-                if(two==NULL){
-                    two=t;
-                    twot=t;
-                }
-                else{
-                    twot->next=t;
-                    twot=twot->next;
-                }
+            if(t->data==2){
+                ct2++;
             }
             t=t->next;
         }
-        
-        Node *ans=NULL;
-        Node *anst=NULL;
-        if(zero){
-            ans=zero;
-            anst=zerot;
+        t=head;
+        while(ct0){
+            t->data=0;
+            t=t->next;
+            ct0--;
         }
-        if(one){
-            if(anst){
-                anst->next=one;
-                anst=onet;
-            }
-            else{
-                ans=one;
-                anst=onet;
-            }
+        while(ct1){
+            t->data=1;
+            t=t->next;
+            ct1--;
         }
-        if(two){
-            if(anst){
-                anst->next=two;
-                anst=twot;
-            }
-            else{
-                ans=two;
-                anst=twot;
-            }
+        while(ct2){
+            t->data=2;
+            t=t->next;
+            ct2--;
         }
-        anst->next=NULL;
-        return ans;
+        return head;
     }
 };
 
