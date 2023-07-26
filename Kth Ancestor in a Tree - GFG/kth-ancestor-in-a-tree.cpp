@@ -126,16 +126,13 @@ void treetav(Node *node, vector<int>&par){
 
 int kthAncestor(Node *root, int k, int node){
     int N=1e5+5;
-    //cout<<k<<" "<<node<<"\n";
     vector<int>par(N,-1);
     treetav(root,par);
-    int ans=-1;
     while(k--){
         if(node<0){
             break;
         }
-        ans=par[node];
         node=par[node];
     }
-    return ans;
+    return node;
 }
