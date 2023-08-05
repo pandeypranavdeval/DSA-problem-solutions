@@ -9,9 +9,6 @@ class Solution{
     //code
         sort(a.begin(),a.end());
         long long s=a[n-1];
-        // for(int i=0;i<n;i++){
-        //     cout<<a[i]<<" ";
-        // }
         for(int i=0;i<n-m+1;i++){
             if((a[i+m-1]-a[i])<s){
                 s=min(s,a[i+m-1]-a[i]);
