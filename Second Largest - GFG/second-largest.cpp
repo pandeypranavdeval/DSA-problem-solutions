@@ -12,7 +12,7 @@ public:
 	int print2largest(int a[], int n) {
         int larg=a[0];
         int slarg=-1;
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             if(a[i]>larg){
                 slarg=larg;
                 larg=a[i];
