@@ -6,46 +6,45 @@ using namespace std;
 class Solution {
 public:
 	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
-	    int dx[] = { -1 , 1 ,  0  , 0 , -1  , -1  ,  1  , 1  };
-        int dy[] = { 0  , 0 , -1  , 1 , -1  ,  1  , -1  , 1  };
-        
-        int n = grid.size();
-        int m = grid[0].size();
-        
-        vector<vector<int>> ans;
-        
-        auto valid = [&](int x, int y, int p) -> bool {
-            if(x < 0 or x >= n or y < 0 or y >= m)
-                return 0;
-            
-            return grid[x][y] == word[p];
-        };
-        
-        function<bool(int, int, int, int)> helper = [&](int x, int y, int dir, int p) -> bool {
-            if(p == word.size() - 1)
-                return 1;
-                
-            if(valid(x + dx[dir], y + dy[dir], p + 1))
-                return helper(x + dx[dir], y + dy[dir], dir, p + 1);
-                
-            return 0;
-        };
-        
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                for(int k = 0; k < 8; k++){
-                    if(valid(i, j, 0) and helper(i, j, k, 0)){
-                        vector<int> t = {i, j};
-                        ans.push_back(t);
-                        break;
-                    }
-                }
-            }
-        }
-        
-        sort(ans.begin(), ans.end());
-        
-        return ans;
+	    vector<vector<int>>ans;
+	    int n=grid.size();
+	    int m=grid[0].size();
+	    int dx[]={1,-1,0,0 ,1,1,-1,-1};
+        int dy[]={0,0,1,-1,-1,1,1,-1};
+	    for(int i=0;i<n;i++){
+	        for(int j=0;j<m;j++){
+	            int p=0;
+	            if(grid[i][j]==word[p]){
+	                int x=i;
+	                int y=j;
+	                p++;
+	                for(int k=0;k<8;k++){
+	                    int nx=x+dx[k];
+	                    int ny=y+dy[k];
+	                    if(nx>=0&&nx<n&&ny>=0&&ny<m&&grid[nx][ny]==word[p]){
+	                        while(p!=word.size()){
+	                            if(nx>=0&&nx<n&&ny>=0&&ny<m&&grid[nx][ny]==word[p]){
+	                                nx+=dx[k];
+	                                ny+=dy[k];
+	                                p++;
+	                            }
+	                            else{
+	                                p=1;
+	                                break;
+	                            }
+	                        }
+	                        
+	                    }
+	                    if(p==word.size()){
+	                       ans.push_back({i,j});
+	                       break;
+	                    }
+	                }
+	            }
+	        }
+	    }
+	    sort(ans.begin(),ans.end());
+	    return ans;
 	}
 };
 
