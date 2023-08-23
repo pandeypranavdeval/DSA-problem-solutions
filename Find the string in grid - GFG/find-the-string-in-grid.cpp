@@ -33,7 +33,6 @@ public:
 	                                break;
 	                            }
 	                        }
-	                        
 	                    }
 	                    if(p==word.size()){
 	                       ans.push_back({i,j});
@@ -43,7 +42,7 @@ public:
 	            }
 	        }
 	    }
-	    sort(ans.begin(),ans.end());
+	    //sort(ans.begin(),ans.end());
 	    return ans;
 	}
 };
