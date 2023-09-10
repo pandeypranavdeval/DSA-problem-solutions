@@ -15,7 +15,60 @@ struct Node {
     }
 };
 
-Node* insert(Node* node, int data);
+
+// } Driver Code Ends
+// Function to insert a node in a BST.
+
+/*
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution
+{
+    public:
+       void solve(Node *node, int &data){
+            if(node->data==data){
+                return;
+            }
+            if(node->data<data){
+                if(node->right){
+                    solve(node->right,data);
+                }
+                else{
+                    Node *t=new Node(data);
+                    node->right=t;
+                    return;
+                }
+            }
+            if(node->data>data){
+                if(node->left){
+                    solve(node->left,data);
+                }
+                else{
+                    Node *t=new Node(data);
+                    node->left=t;
+                    return;
+                }
+            }
+        }
+        Node* insert(Node* node, int data) {
+        solve(node,data);
+        return node;
+    }
+
+};
+
+
+//{ Driver Code Starts.
 
 // Function to Build Tree
 Node* buildTree(string str) {
@@ -99,8 +152,8 @@ int main() {
         getline(cin, s);
         int k = stoi(s);
         // getline(cin, s);
-
-        insert(root, k);
+        Solution ob;
+        ob.insert(root, k);
         vector<int> v;
         inorder(root, v);
         for (int i = 0; i < v.size(); i++) cout << v[i] << " ";
@@ -112,36 +165,3 @@ int main() {
 }
 
 // } Driver Code Ends
-
-
-// Function to insert a node in a BST.
-Node* insert(Node* root, int key) {
-    if(!root){
-        return new Node(key);
-    }
-    Node *cur=root;
-    while(true){
-        if(cur->data==key){
-            break;
-        }
-        if(cur->data<key){
-            if(cur->right){
-                cur=cur->right;
-            }
-            else{
-                cur->right=new Node(key);;
-                break;
-            }
-        }
-        else{
-            if(cur->left){
-                cur=cur->left;
-            }
-            else{
-                cur->left=new Node(key);
-                break;
-            }
-        }
-    }
-    return root;
-}
