@@ -10,7 +10,7 @@ class Solution
     //Function to count the number of ways in which frog can reach the top.
     int N=1e9+7;
     long long solve(int n,vector<long long>&dp){
-        if(n<=0){
+        if(n==0){
             return 1;
         }
         if(dp[n]!=-1){
