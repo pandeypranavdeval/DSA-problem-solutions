@@ -9,43 +9,56 @@ using namespace std;
 
 class Solution{
 public:
-    int solve(int i,int sum,int arr[],vector<vector<int>>&dp){
-	    if(i==0){
-	        if(sum==0){
-	            return 1;
-	        }
-	        else{
-	            return 0;
-	        }
-	    }
-	    if(dp[i][sum]!=-1){
-	        return dp[i][sum];
-	    }
-	    if(arr[i-1]<=sum){
-	        int pick=solve(i-1,sum-arr[i-1],arr,dp);
-	        int notpick=solve(i-1,sum,arr,dp);
-	        return dp[i][sum]=(pick+notpick);
-	    }
-	    else{
-	        return dp[i][sum]=solve(i-1,sum,arr,dp);
-	    }
-	}
-    int equalPartition(int n, int arr[])
-    {
+    int solve(int ind,int sum,int nums[],vector<vector<int>>&dp){
+        if(sum==0){
+            return 1;
+        }
+        if(ind==0){
+            return 0;
+        }
+        if(dp[ind][sum]!=-1){
+            return dp[ind][sum];
+        }
+        if(nums[ind-1]<=sum){
+            dp[ind][sum]=(solve(ind-1,sum-nums[ind-1],nums,dp))||solve(ind-1,sum,nums,dp);
+        }
+        else{
+            dp[ind][sum]=solve(ind-1,sum,nums,dp);
+        }
+        return dp[ind][sum];
+    }
+    int equalPartition(int n, int nums[]){
         int sum=0;
         for(int i=0;i<n;i++){
-            sum+=arr[i];
+            sum+=nums[i];
         }
         if(sum&1){
             return 0;
         }
-        sum/=2;
+        sum=sum/2;
         vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
-        int ans=solve(n,sum,arr,dp);
-        if(ans){
-            return 1;
-        }
-        return 0;
+        //for recusive use that above dp 
+        //for tabulation use this
+        return solve(n,sum,nums,dp);
+        //vector<vector<bool>>dp(n+1,vector<bool>(sum+1));
+        // for intitalization
+        // for(int i=0;i<n+1;i++){
+        //     dp[i][0]=true;
+        // }
+        // for(int j=1;j<sum+1;j++){
+        //     dp[0][j]=false;
+        // }
+        // for(int i=1;i<n+1;i++){
+        //     for(int j=1;j<sum+1;j++){
+        //         if(nums[i-1]<=j){
+        //             dp[i][j]=dp[i-1][j-nums[i-1]]||dp[i-1][j];
+        //         }
+        //         else{
+        //             dp[i][j]=dp[i-1][j];
+        //         }
+        //     }
+        // }
+        // return dp[n][sum];
     }
 };
 
