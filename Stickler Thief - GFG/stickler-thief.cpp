@@ -7,28 +7,24 @@ typedef long long int ll;
 class Solution
 {
     public:
-    //Function to find the maximum money the thief can get.
-    int f(int ind,int arr[],vector<int>&dp){
-	    if(ind==0){
-	        return arr[0];
-	    }
-	    if(ind<0){
-	        return 0;
-	    }
-	    if(dp[ind]!=-1){
-	        return dp[ind];
-	    }
-	    int a=INT_MIN;
-	    int b=INT_MIN;
-	    a=f(ind-2,arr,dp)+arr[ind];
-	    b=f(ind-1,arr,dp);
-	    return dp[ind]=max(a,b);
-	}
-    int FindMaxSum(int arr[], int n)
-    {
+    int solve(int ind,int arr[],int n,vector<int>&dp){
+        if(ind<0){
+            return 0;
+        }
+        if(ind==0){
+            return arr[0];
+        }
+        if(dp[ind]!=-1){
+            return dp[ind];
+        }
+        int pick=arr[ind]+solve(ind-2,arr,n,dp);
+        int notpick=solve(ind-1,arr,n,dp);
+        return dp[ind]=max(pick,notpick);
+    }
+    int FindMaxSum(int arr[], int n){
         vector<int>dp(n,-1);
-	    int ans=f(n-1,arr,dp);
-	    return ans;
+        int ans=solve(n-1,arr,n,dp);
+        return ans;
     }
 };
 
