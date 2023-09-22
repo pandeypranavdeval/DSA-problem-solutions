@@ -6,34 +6,27 @@ using namespace std;
 class Solution{
 
 	public:
-	int N=1e9+7;
-	int solve(int i,int sum,int arr[],vector<vector<int>>&dp){
-	    if(i==0){
-	        if(sum==0){
-	            return 1;
-	        }
-	        else{
-	            return 0;
-	        }
-	    }
-	    int N=1e9+7;
-	    if(dp[i][sum]!=-1){
-	        return dp[i][sum];
-	    }
-	    if(arr[i-1]<=sum){
-	        int pick=solve(i-1,sum-arr[i-1],arr,dp);
-	        int notpick=solve(i-1,sum,arr,dp);
-	        return dp[i][sum]=(pick+notpick)%N;
-	    }
-	    else{
-	        return dp[i][sum]=solve(i-1,sum,arr,dp)%N;
-	    }
-	}
 	int perfectSum(int arr[], int n, int sum)
 	{
-        vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
-        int ans=solve(n,sum,arr,dp);
-        return ans;
+	    int N=1e9+7;
+    vector<vector<int>>dp(n+1,vector<int>(sum+1));
+    for(int i=0;i<n+1;i++){
+        dp[i][0]=1;
+    }
+    for(int j=1;j<sum+1;j++){
+        dp[0][j]=0;
+    }
+    for(int i=1;i<n+1;i++){
+        for(int j=0;j<sum+1;j++){
+            if(arr[i-1]<=j){
+                dp[i][j]=(dp[i-1][j-arr[i-1]]+dp[i-1][j])%N;
+            }
+            else{
+                dp[i][j]=(dp[i-1][j])%N;
+            }
+        }
+    }
+    return dp[n][sum];
 	}
 	  
 };
