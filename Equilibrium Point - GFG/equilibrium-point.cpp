@@ -10,25 +10,17 @@ class Solution{
     // a: input array
     // n: size of array
     int equilibriumPoint(long long a[], int n) {
-        
-        if(n==1){
-            return 1;
+        long long ts=0;
+        for(int i=0;i<n;i++){
+            ts+=a[i];
         }
-        long long pre[n];
-        long long suff[n];
-        pre[0]=a[0];
-        suff[n-1]=a[n-1];
-        
-        for(int i=1;i<n;i++){
-            pre[i]=pre[i-1]+a[i];
-        }
-        for(int i=n-2;i>=0;i--){
-            suff[i]=suff[i+1]+a[i];
-        }
-        for(int i=1;i<n-1;i++){
-            if(pre[i-1]==suff[i+1]){
+        long long s=0;
+        for(int i=0;i<n;i++){
+            ts-=a[i];
+            if(s==ts){
                 return i+1;
             }
+            s+=a[i];
         }
         return -1;
     }
