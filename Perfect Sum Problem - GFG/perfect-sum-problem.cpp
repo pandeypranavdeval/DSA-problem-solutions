@@ -8,7 +8,7 @@ class Solution{
 	public:
 	int perfectSum(int arr[], int n, int sum)
 	{
-	    int N=1e9+7;
+	 int N=1e9+7;
     vector<vector<int>>dp(n+1,vector<int>(sum+1));
     for(int i=0;i<n+1;i++){
         dp[i][0]=1;
