@@ -9,8 +9,6 @@ using namespace std;
 class Solution{
   public:
     vector<int> printClosest(int arr[], int brr[], int n, int m, int x) {
-        sort(arr,arr+n);
-        sort(brr,brr+m);
         int i=0;
         vector<int>ans(2);
         int j=n-1;
@@ -62,6 +60,7 @@ class Solution{
         return ans;
     }
 };
+
 
 //{ Driver Code Starts.
 
