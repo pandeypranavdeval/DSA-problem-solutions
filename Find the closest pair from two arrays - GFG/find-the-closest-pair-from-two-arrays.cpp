@@ -27,16 +27,6 @@ class Solution{
                     ans[1]=brr[i];
                 }
                 j--;
-                if(j==0){
-                    while(i<m){
-                        if(v>abs((arr[j]+brr[i])-x)){
-                            v=abs((arr[j]+brr[i])-x);
-                            ans[0]=arr[j];
-                            ans[1]=brr[i];
-                        }
-                        i++;
-                    }
-                }
             }
             else{
                 if(v>abs((arr[j]+brr[i])-x)){
@@ -45,21 +35,12 @@ class Solution{
                     ans[1]=brr[i];
                 }
                 i++;
-                if(i==(m-1)){
-                    while(j>=0){
-                        if(v>abs((arr[j]+brr[i])-x)){
-                            v=abs((arr[j]+brr[i])-x);
-                            ans[0]=arr[j];
-                            ans[1]=brr[i];
-                        }
-                        j--;
-                    }
-                }
             }
         }
         return ans;
     }
 };
+
 
 
 //{ Driver Code Starts.
