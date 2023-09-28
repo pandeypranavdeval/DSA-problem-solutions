@@ -8,30 +8,28 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
-
-
 class Solution{
   public:
-    int solve(int ind,int w,int price[],vector<vector<int>>&dp){
-        if(ind==0||w==0){
-            return 0;
-        }
-        // recursive solution
-        if(dp[ind][w]!=-1){
-            return dp[ind][w];
-        }
-        if(ind<=w){
-            dp[ind][w]=max(price[ind-1]+solve(ind,w-ind,price,dp),solve(ind-1,w,price,dp));
-        }
-        else{
-            dp[ind][w]=solve(ind-1,w,price,dp);
-        }
-        return dp[ind][w];
+    int cutRod(int price[], int n) {
+    vector<vector<int>>dp(n+1,vector<int>(n+1));
+    //tabulation
+    for(int i=0;i<n+1;i++){
+        dp[i][0]=0;
     }
-    int cutRod(int price[], int n){
-        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
-        int ans=solve(n,n,price,dp);
-        return ans;
+    for(int j=0;j<n+1;j++){
+        dp[0][j]=0;
+    }
+    for(int i=1;i<n+1;i++){
+        for(int j=1;j<n+1;j++){
+            if(i<=j){
+                dp[i][j]=max(price[i-1]+dp[i][j-i],dp[i-1][j]);
+            }
+            else{
+                dp[i][j]=dp[i-1][j];
+            }
+        }
+    }
+    return dp[n][n];
     }
 };
 
