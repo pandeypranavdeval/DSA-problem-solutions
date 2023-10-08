@@ -37,31 +37,30 @@ class Solution
     public:
     Node* pairWiseSwap(struct Node* head) 
     {
-        // The task is to complete this method
-          Node *first=head,*second=head->next,*prev=head;
-        while(first&&second){
-            Node *Next=second->next;
-            second->next=first;
-            first->next=Next;
-          if(prev==head){
-              head=second;
-              prev=first;
-          }
-          else{
-              prev->next=second;
-              prev=first;
-          }
-           if(Next==NULL){
-               first=NULL;
-               second=NULL;
-           }
-           else{
-              first=Next;
-              second=Next->next;
-           }
+        Node *p=head,*q=head->next, *prev=NULL;
+        while(q!=NULL){
+            //cout<<p->data<<" "<<q->data<<" ";
+            if(p==head){
+                head=q;
+                prev=p;
+            }
+            else{
+                prev->next=q;
+                prev=p;
+            }
+            Node *r=q->next;
+            q->next=p;
+            p->next=r;
+            p=r;
+            
+            if(r){
+                q=r->next;
+            }
+            else{
+                q=NULL;
+            }
         }
-       return head;
-
+        return head;
     }
 };
 
