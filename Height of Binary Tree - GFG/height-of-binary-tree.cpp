@@ -99,23 +99,24 @@ struct Node
 class Solution{
     public:
     //Function to find the height of a binary tree.
-    int hgt(Node *node){
-        if(node==NULL){
-            return 1;
-        }
-        int lh=0;
-        int rh=0;
-        if(node->left){
-            lh=hgt(node->left);
-        }
-        if(node->right){
-            rh=hgt(node->right);
-        }
-        return 1+max(lh,rh);
-    }
     int height(struct Node* node){
-        // code here
-        int ans=hgt(node);
+        queue<Node*>q;
+        int ans=0;
+        q.push(node);
+        while(!q.empty()){
+            int sz=q.size();
+            for(int i=0;i<sz;i++){
+                Node *tmp=q.front();
+                q.pop();
+                if(tmp->left){
+                    q.push(tmp->left);
+                }
+                if(tmp->right){
+                    q.push(tmp->right);
+                }
+            }
+            ans++;
+        }
         return ans;
     }
 };
