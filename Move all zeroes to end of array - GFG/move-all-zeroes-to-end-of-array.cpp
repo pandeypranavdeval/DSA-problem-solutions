@@ -7,9 +7,8 @@ using namespace std;
 class Solution{
 public:
 	void pushZerosToEnd(int arr[], int n) {
-	    // code here
-	    int p=0;
 	    int ct=0;
+	    int p=0;
 	    for(int i=0;i<n;i++){
 	        if(arr[i]==0){
 	            ct++;
@@ -18,7 +17,7 @@ public:
 	            arr[p++]=arr[i];
 	        }
 	    }
-	    for(int i=p;i<n;i++){
+	    for(int i=n-ct;i<n;i++){
 	        arr[i]=0;
 	    }
 	}
